@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Grade Calculator</title>
+</head>
+<body>
+    <h1>Course Grade Calculator</h1>
+    <script>
+        let numOfCourses = prompt("How many courses did you finish?", "0");
+        numOfCourses = parseInt(numOfCourses);
+
+        if (isNaN(numOfCourses) || numOfCourses <= 0) 
+        {
+            document.write("<h3>Invalid Input!</h3>"); 
+        }
+         else {
+            let courseMarks = [];
+            let total = 0;
+            let invalidInput = false; 
+
+            for (let i = 1; i <= numOfCourses; i++) {
+                let mark = prompt("Enter your mark for course " + i);
+                mark = parseFloat(mark); 
+
+                if (isNaN(mark) || mark < 0 || mark > 100) {
+                    document.write("<h3>Invalid Input!</h3>"); 
+                    invalidInput = true; 
+                    break; 
+                }
+
+                courseMarks.push(mark); 
+                total += mark; 
+            }
+
+            if (invalidInput) {
+                document.write("<p>Reload the page to try again.</p>");
+            } else {
+                let average = total / numOfCourses;
+                average = Math.round(average * 100) / 100;
+
+                let gradeMessage;
+                if (average >= 85 && average <= 100) {
+                    gradeMessage = "Your final average is " + average + ". Your grade is A+";
+                } else if (average >= 70 && average < 85) {
+                    gradeMessage = "Your final average is " + average + ". Your grade is B";
+                } else if (average >= 60 && average < 70) {
+                    gradeMessage = "Your final average is " + average + ". Your grade is C";
+                } else if (average >= 50 && average < 60) {
+                    gradeMessage = "Your final average is " + average + ". Your grade is D";
+                } else {
+                    gradeMessage = "Your final average is " + average + ". Your grade is F";
+                }
+
+               
+                document.write("<h3>Course Marks:</h3><ul>");
+                for (let i = 0; i < courseMarks.length; i++) {
+                    document.write("<li>Course " + (i + 1) + ": " + courseMarks[i] + "</li>");
+                }
+                document.write("</ul>");
+
+                document.write("<h2>" + gradeMessage + "</h2>");
+            }
+        }
+    </script>
+</body>
+</html>
